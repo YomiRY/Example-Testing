@@ -1,0 +1,94 @@
+/*
+ * Test7.cpp
+ *
+ *  Created on: 2015年6月15日
+ *      Author: yomi
+ */
+
+#include <iostream>
+#include <cstdlib>
+#include <time.h>
+using namespace std;
+
+struct node {
+	int data;
+	node *next;
+};
+
+typedef node *list;
+
+void print(list);
+void deMemory(list);
+list delData(int, list);
+
+int main() {
+	list head, link;
+	int n = 5, data;
+	link = new node;
+	head = link;
+
+	srand(time(0));
+
+	head->data = rand() % 100;
+	head->next = NULL;
+
+	for (int i = 1; i < n; i++) {
+		link = new node;
+		link->data = rand() % 100;
+		link->next = head;
+		head = link;
+	}
+
+	cout << "Link data as below:" << endl;
+	print(head);
+
+	cout << "Yout want delet data is ";
+	cin >> data;
+
+	head = delData(data, head);
+	cout << "Data list as below after deleting the specific data" << endl;
+	print(head);
+	deMemory(head);
+
+	return 0;
+}
+
+void print(list head) {
+	while (head) {
+		cout << "data = " << head->data << endl;
+		head = head->next;
+	}
+}
+
+list delData(int data, list head) {
+	list tmp = NULL;
+
+	if (head->data == data) {
+		tmp = head;
+		head = head->next;
+		delete tmp;
+	} else {
+		list node = head;
+
+		while (node->next) {
+			if (node->next->data == data) {
+				tmp = node->next;
+				node->next = node->next->next;
+				delete tmp;
+				break;
+			}
+			node = node->next;
+		}
+	}
+	return head;
+
+}
+
+void deMemory(list node) {
+	while (node) {
+		list tmp = node;
+		node = node->next;
+		delete tmp;
+	}
+}
+

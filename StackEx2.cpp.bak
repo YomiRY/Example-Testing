@@ -1,0 +1,56 @@
+/*
+ * StackEx2.cpp
+ *
+ *  Created on: 2015年6月15日
+ *      Author: yomi
+ */
+#include <iostream>
+
+using namespace std;
+
+struct node {
+	int data;
+	node *next;
+};
+
+typedef node *list;
+
+list push(list stack, int data);
+list pop(list stack, int*);
+
+int main() {
+	list stack = NULL;
+	int data;
+
+	cout << "The following pushed data:" << endl;
+	for (int i = 1; i <= 5; i++) {
+		data = i * 10;
+		stack = push(stack, data);
+		cout << "Data = " << data << endl;
+	}
+
+	cout << "Pop the all data as below:" << endl;
+
+	while (stack) {
+		stack = pop(stack, &data);
+		cout << "Data = " << data << endl;
+	}
+
+	return 0;
+}
+
+list push(list stack, int data) {
+	list link = new node;
+	link->data = data;
+	link->next = stack;
+	return link;
+}
+
+list pop(list stack, int* data) {
+	list top = stack;
+	*data = top->data;
+	stack = stack->next;
+	delete top;
+	return stack;
+}
+
