@@ -1,0 +1,54 @@
+/*
+ * Test4.cpp
+ *
+ *  Created on: 2015年6月15日
+ *      Author: yomi
+ */
+#include <iostream>
+using namespace std;
+
+struct node {
+	int data;
+	node *next;
+};
+
+typedef node *list;
+
+void printList(list);
+void releaseList(list);
+
+int main() {
+	list head, tail, link;
+	link = new node;
+	head = tail = link;
+	head->data = 20;
+	link = new node;
+	link->data = 30;
+	link->next = NULL;
+	tail->next = link;
+	tail = link;
+	link = head;
+
+	printList(head);
+	releaseList(head);
+
+	return 0;
+
+}
+
+void printList(list node) {
+	while (node) {
+		cout << "data=" << node->data << endl;
+		node = node->next;
+	}
+}
+
+void releaseList(list head) {
+	while (head) {
+		list tmp = head;
+		head = head->next;
+
+		delete tmp;
+	}
+}
+

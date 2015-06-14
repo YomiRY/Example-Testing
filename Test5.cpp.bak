@@ -1,0 +1,64 @@
+/*
+ * Test5.cpp
+ *
+ *  Created on: 2015年6月15日
+ *      Author: yomi
+ */
+
+#include <iostream>
+using namespace std;
+
+struct node {
+	int data;
+	node *next;
+};
+
+typedef node *list;
+
+void printList(list);
+void releaseList(list);
+
+int main() {
+	list head = NULL, tail = NULL, link = NULL;
+	int n;
+
+	cout << "Please input the node number:";
+	cin >> n;
+
+	for (int i = 1; i <= n; i++) {
+		if (!head) {
+			head = new node;
+			head->data = i;
+			head->next = NULL;
+			link = tail = head;
+		} else {
+			link = new node;
+			link->data = i;
+			link->next = NULL;
+			tail->next = link;
+			tail = link;
+		}
+	}
+
+	printList(head);
+	releaseList(head);
+
+	return 0;
+}
+
+void printList(list node) {
+	while (node) {
+		cout << "data = " << node->data << endl;
+		node = node->next;
+	}
+}
+
+void releaseList(list node) {
+	while (node) {
+		list tmp = node;
+		node = node->next;
+
+		delete tmp;
+	}
+}
+

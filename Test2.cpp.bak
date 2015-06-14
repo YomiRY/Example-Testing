@@ -1,0 +1,30 @@
+/*
+ * Test2.cpp
+ *
+ *  Created on: 2015年6月15日
+ *      Author: yomi
+ */
+
+#include <iostream>
+using namespace std;
+
+struct node {
+	int data;
+	node *next;
+};
+
+typedef node *list;
+
+int main() {
+    list link;
+    link = new node;
+    link->data = 20;
+    link->next = NULL;
+
+    cout<<"data = "<<link->data<<endl;
+
+    delete link;
+
+	return 0;
+}
+
